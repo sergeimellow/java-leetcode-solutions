@@ -1,6 +1,6 @@
 // https://leetcode.com/problems/valid-parentheses/
-// Runtime: 4 ms, faster than 31.92% of Java online submissions for Valid Parentheses.
-// Memory Usage: 42.3 MB, less than 24.50% of Java online submissions for Valid Parentheses.
+// Runtime: 2 ms, faster than 90.75% of Java online submissions for Valid Parentheses.
+// Memory Usage: 40.5 MB, less than 87.12% of Java online submissions for Valid Parentheses.
 
 //Given a string s containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.
 //
