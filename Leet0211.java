@@ -8,10 +8,20 @@ public class Leet0211 {
 // TODO some other time
 //
     public static void main(String[] args) {
-        Leet0212 a = new Leet0212();
-        char[][] board = {{'o','a','a','n'},{'e','t','a','e'},{'i','h','k','r'},{'i','f','l','v'}};
-        String[] strings = {"oath","pea","eat","rain"};
-        a.findWords(board, strings);
+
+//        char[][] board = {{'o','a','a','n'},{'e','t','a','e'},{'i','h','k','r'},{'i','f','l','v'}};
+//        String[] strings = {"oath","pea","eat","rain"};
+        Leet0208.Trie b = new Leet0208.Trie();
+        b.insert("oath");
+        b.insert("oats");
+        b.insert("eat");
+        b.insert("eating");
+        b.startsWith("eat");
+        b.startsWith("ea");
+        b.search("eat");
+        b.search("ea");
+        b.getLast("ea");
+        b.getLast("eating");
     }
 
     // Original Python solution ported to Java.
