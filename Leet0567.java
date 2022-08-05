@@ -1,4 +1,5 @@
 // https://leetcode.com/problems/permutation-in-string/submissions/
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -6,17 +7,19 @@ public class Leet0567 {
 
 
     public static void main(String[] args) {
-        checkInclusionWithoutHashMapAndCaseSens("ba", "AZddabBAZaz");
+        System.out.println(checkInclusionWithoutHashMapAndCaseSens("ba", "AZddabBAZaz"));
     }
 
     public static boolean checkInclusionWithoutHashMapAndCaseSens(String s1, String s2)
     {
         if (s1.length() > s2.length()) return false;
+        int windowSize = s1.length();
         int[] s1Arr = new int[58];
         int[] s2Arr = new int[58];
         int matches = 0;
 
-        for (int i = 0; i < s1.length(); i ++)
+        // init arr1 & arr2
+        for (int i = 0; i < windowSize; i++)
         {
             s1Arr[s1.charAt(i) - 'A'] += 1;
             s2Arr[s2.charAt(i) - 'A'] += 1;
@@ -29,40 +32,48 @@ public class Leet0567 {
                 matches += 1;
             }
         }
+
+        System.out.println(Arrays.toString(s1Arr));
+        System.out.println(Arrays.toString(s2Arr));
+        System.out.println(matches);
+
         int index;
-        int l = 0;
-        for (int i = s1.length(); i < s2.length(); i++)
+        int leftPointer = 0;
+        for (int i = windowSize; i<s2.length(); i++)
         {
             if (matches == 58)
             {
                 return true;
             }
+            // get the index of the current char, aka the right pointer
             index = s2.charAt(i) - 'A';
+            // increment the count of the retrieved index in arr
             s2Arr[index] += 1;
             if (s1Arr[index] == s2Arr[index])
             {
                 matches += 1;
             }
-            else if (s1Arr[index] + 1 == s2Arr[index])
-            {
+            else if (s1Arr[index] + 1 == s2Arr[index]) {
                 matches -= 1;
             }
 
-            index = s2.charAt(l) - 'A';
+            // get the index of the current char
+            index = s2.charAt(leftPointer) - 'A';
+            // increment the count of the retrieved index in arr
             s2Arr[index] -= 1;
-
             if (s1Arr[index] == s2Arr[index])
             {
                 matches += 1;
             }
-            else if (s1Arr[index] - 1 == s2Arr[index])
-            {
+            else if (s1Arr[index] - 1 == s2Arr[index]) {
                 matches -= 1;
             }
-
-            l += 1;
+            // slides the left pointer to the right
+            leftPointer += 1;
         }
+
         return matches == 58;
+
     }
 
 
