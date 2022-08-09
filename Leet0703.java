@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.PriorityQueue;
 
@@ -22,6 +23,8 @@ public class Leet0703 {
     }
 
     public static void KthLargest(int k, int[] nums) {
+        // reminder how to pop the largest values
+        // minHeap = new PriorityQueue<>(3, Collections.reverseOrder());
         minHeap = new PriorityQueue<>();
         queueSize = 1;
         for (int num : nums)

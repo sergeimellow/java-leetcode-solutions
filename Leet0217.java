@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 class Leet0217 {
-    public static void main(String[] args) {;
+    public static void main(String[] args) {
         int[] input = new int[]{-1,-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1};
         System.out.println(containsDuplicate(input));
     }
