@@ -53,11 +53,10 @@ public class Leet0200 {
                 currentRowOffset = currentRowCol.get(0)  + direction.get(0);
                 currentColOffset = currentRowCol.get(1) + direction.get(1);
                 currentRowColWithOffsets = Arrays.asList(currentRowOffset, currentColOffset);
-                if (
-                        currentRowOffset >= 0 && currentColOffset >= 0 &&
-                        currentRowOffset < maxRows && currentColOffset < maxCols &&
-                        grid[currentRowOffset][currentColOffset] == '1' &&
-                        !visitedBefore.contains(currentRowColWithOffsets))
+                if (currentRowOffset >= 0 && currentColOffset >= 0 &&
+                    currentRowOffset < maxRows && currentColOffset < maxCols &&
+                    grid[currentRowOffset][currentColOffset] == '1' &&
+                    !visitedBefore.contains(currentRowColWithOffsets))
                 {
                     queue.add(currentRowColWithOffsets);
                     visitedBefore.add(currentRowColWithOffsets);
