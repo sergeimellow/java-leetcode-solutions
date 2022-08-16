@@ -38,16 +38,16 @@ public class Leet0543 {
 
     public static int diameterOfBinaryTree(TreeNode n) {
         diameter = 0;
-        dfs(n, 0);
+        dfs(n);
         return diameter;
     }
 
-    public static int dfs(TreeNode node, int max)
+    public static int dfs(TreeNode node)
     {
         if (node == null) return -1;
 
-        int left = dfs(node.left, max);
-        int right = dfs(node.right, max);
+        int left = dfs(node.left);
+        int right = dfs(node.right);
         diameter = Math.max(diameter,  2 + left + right);
         return 1 + Math.max(left, right);
 
