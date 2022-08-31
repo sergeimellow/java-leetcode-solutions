@@ -1,7 +1,23 @@
 import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class Scrap {
     public static void main(String[] args) {
+
+        List<String> commands = List.of("DetectSquares", "add1", "add2", "add3", "count4", "count", "add6", "count7");
+        Map<String, Character> firstCharByString = commands.stream()
+                                                           .distinct()
+                                                           .filter(s -> s.contains("1"))
+                                                           .collect(Collectors.toMap(Function.identity(),
+                                                                                     s -> s.charAt(0)));
+
+        String c = firstCharByString.keySet().stream().reduce("", String::concat);
+
+
+
+        String abc = "123;";
 
 //        String[] commands = {"DetectSquares", "add", "add", "add", "count", "count", "add", "count"};
 //        int[][] commandInputs = {{}, {3, 10}, {11, 2}, {3, 2}, {11, 10}, {14, 8}, {11, 2}, {11, 10}};
