@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 // https://leetcode.com/problems/unique-paths/
 public class Leet0062 {
     public static void main(String[] args) {
@@ -5,27 +7,27 @@ public class Leet0062 {
     }
 
     public static int uniquePaths(int m, int n) {
-        int[][] arr = new int[m][n];
-
-        for (int i = m - 1; i >= 0; i--)
+        int[] curRow = new int[n];
+        int[] nextRow;
+        Arrays.fill(curRow, 1);
+        for (int i = m - 2; i >= 0; i--)
         {
+            nextRow = new int[n];
             for (int j = n - 1; j >= 0; j--)
             {
-                if (i == m - 1)
+                if (j+1 != n)
                 {
-                    arr[i][j] = 1;
-                    continue;
+                    nextRow[j] = nextRow[j+1] + curRow[j];
                 }
-                if (j == n - 1)
+                else
                 {
-                    arr[i][j] = 1;
-                    continue;
+                    nextRow[j] = curRow[j];
                 }
-                arr[i][j] = arr[i][j+1] + arr[i+1][j];
             }
+            curRow = nextRow;
         }
 
-        return arr[0][0];
+        return curRow[0];
     }
 
 }
