@@ -1,11 +1,22 @@
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class Scrap {
-    public static void main(String[] args) {
 
+    // notes on generics
+    public static <T> List<T> fromArrayToList(T[] a) {
+        return Arrays.stream(a).collect(Collectors.toList());
+    }
+
+    public static <T, G> List<G> fromArrayToList(T[] a, Function<T, G> mapperFunction) {
+        return Arrays.stream(a)
+                .map(mapperFunction)
+                .collect(Collectors.toList());
+    }
+
+    public static void main(String[] args) {
+        // map, filter, reduce, sort, toMap
         List<String> commands = List.of("DetectSquares", "add1", "add2", "add3", "count4", "count", "add6", "count7");
         Map<String, Character> firstCharByString = commands.stream()
                                                            .distinct()
@@ -15,7 +26,48 @@ public class Scrap {
 
         String c = firstCharByString.keySet().stream().reduce("", String::concat);
 
+        // random Comparators
+        // Comparator.reverseOrder()
 
+        Comparator<String> integerStringComparator = new Comparator<String>() {
+            @Override
+            public int compare(String s1, String s2) {
+                return Integer.parseInt(s1) - Integer.parseInt(s2);
+            }
+        };
+
+        // IntelliJ suggestions
+        // Comparator<String> a = (s1, s2) -> Integer.parseInt(s1) - Integer.parseInt(s2);
+        // Comparator<String> a = Comparator.comparingInt(Integer::parseInt);
+
+
+        // synxtax remidners
+        List<String> numberStrings = List.of("10", "9", "8", "7", "6", "5", "4", "3", "2", "1");
+
+        List<String> sortedNumberStrings = List.of("10", "9", "8", "7", "6", "5", "4", "3", "2", "1")
+                                               .stream()
+                                               .sorted(integerStringComparator)
+                                               .collect(Collectors.toList());
+
+        List<Integer> numbers = numberStrings.stream()
+                                             .map(n -> Integer.parseInt(n))
+                                             .collect(Collectors.toList());
+        // IntelliJ suggestion
+        // List<Integer> numbers = numberStrings.stream().map(Integer::parseInt).toList();
+        List<Integer> evenNumbers = numbers.stream().filter(n -> n % 2 == 0).collect(Collectors.toList());
+        List<Integer> sortedEventNumbers = numbers.stream().sorted().collect(Collectors.toList());
+        Integer evenNumbersSum = evenNumbers.stream().reduce(0, (currentTotal, number) -> currentTotal + number);
+        // IntelliJ suggestion
+        // Integer evenNumbersSum = evenNumbers.stream().reduce(0, Integer::sum);
+
+        // reminder on how to use generics
+        Integer[] intArray = {1, 2, 3, 4, 5};
+        Boolean[] boolArray = {true, false, false, false, true};
+
+        List<Integer> integerList = fromArrayToList(intArray);
+        List<Boolean> booleanList = fromArrayToList(boolArray);
+        List<String> stringList = fromArrayToList(intArray, Object::toString);
+        List<String> booleanStringList = fromArrayToList(boolArray, Object::toString);
 
         String abc = "123;";
 
@@ -85,7 +137,7 @@ public class Scrap {
             }
         }
 
-        // should use string builder here but i'm to lazy since this is scrap
+        // should use string builder here but i'm to lazy since this is scrap code
         for (int i =0; i < leadingOpenBrackets; i++)
         {
             ret = ret + leftBracket;
